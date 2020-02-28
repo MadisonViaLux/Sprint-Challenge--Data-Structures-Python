@@ -1,4 +1,5 @@
 import time
+from lru_cache import LRUCache
 
 start_time = time.time()
 
@@ -13,10 +14,30 @@ f.close()
 duplicates = []  # Return the list of duplicates in this data structure
 
 # Replace the nested for loops below with your improvements
-for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+
+# I'm guessing I need a cache then... Based on the "hint" in the README
+
+#_________________________________________________________________________
+
+# Setting the limit of the cache for the 10,000 names
+lru = LRUCache(10000)
+
+# Setting every name in the first list to the cache
+for name in names_1:
+    lru.set(name, True)
+
+# Comparing every name in the second list to the names in the first (in cache)
+# If there is a duplicate then append it to the duplicates list
+for name2 in names_2:
+    if lru.get(name2) != None:
+        duplicates.append(name2)
+
+#_________________________________________________________________________
+
+# for name_1 in names_1:
+#     for name_2 in names_2:
+#         if name_1 == name_2:
+#             duplicates.append(name_1)
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
