@@ -42,6 +42,31 @@ class LinkedList:
     # if we've gotten here, then the target node isn't in our list
     return False
 
+# O(n)
   def reverse_list(self):
     # TO BE COMPLETED
-    pass
+    prev_node = None
+    current_node = self.head
+    while current_node is not None:
+      next_node = current_node.get_next()
+      current_node.set_next(prev_node)
+      prev_node = current_node
+      current_node = next_node
+    self.head = prev_node
+
+    # We want a prev, current, and next node to cycle through the list
+
+    # the current node should have the starting point of the head
+
+    # the prev node should start at None because before we change over
+    # the current node we will be storing the value of the current node
+    # in the prev node to use as a reference point for the next node
+
+    # then if we'd want to move everything over we need to make the prev
+    # node the current node and the current node needs to become the
+    # next node so that we can loop through the node until the node wants
+    # the node to become the node through the node
+
+    # then set the head to become the prev node to reset the node
+
+    # node
